@@ -253,13 +253,9 @@ stress_prediction/
 
 ## 🎥 Demo Video
 
-📹 Add your video link here:
-
 ``
 
-
 https://github.com/user-attachments/assets/ce39e70a-536d-4141-b871-9586c5843973
-
 
 
 ```

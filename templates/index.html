@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Stress Predictor</title>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+
+body{
+margin:0;
+font-family:Poppins;
+background: linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+color:white;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 50px;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(10px);
+}
+
+.logo{
+font-weight:600;
+}
+
+/* NAV LINKS */
+
+.navbar ul{
+display:flex;
+align-items:center;
+gap:20px;
+list-style:none;
+margin:0;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+.navbar a:hover{
+color:#ffd369;
+}
+
+/* PROFILE ICON */
+
+.profile{
+width:40px;
+height:40px;
+border-radius:50%;
+background:#ffd369;
+color:black;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:600;
+cursor:pointer;
+}
+
+.profile:hover{
+transform:scale(1.1);
+}
+
+/* SECTIONS GAP */
+
+section{
+padding:80px 20px;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+}
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:12px 25px;
+background:#ffd369;
+color:black;
+border-radius:8px;
+text-decoration:none;
+}
+
+/* ABOUT */
+
+.about{
+text-align:center;
+max-width:800px;
+margin:auto;
+}
+
+/* PREDICTION */
+
+.predict{
+text-align:center;
+}
+
+/* FORM CARD BIGGER */
+
+.form-card{
+background:rgba(255,255,255,0.1);
+padding:50px;
+border-radius:20px;
+backdrop-filter:blur(15px);
+
+width:95%;
+max-width:1200px;   /* 🔥 MORE WIDTH */
+margin:auto;
+}
+
+/* CHANGE TO 2 COLUMNS (BETTER FOR TEXT VISIBILITY) */
+
+form{
+display:grid;
+grid-template-columns:1fr 1fr;   /* 🔥 changed from 3 → 2 */
+gap:25px;
+}
+
+/* INPUT BIGGER */
+
+input{
+padding:16px;   /* 🔥 bigger */
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,0.95);
+font-size:15px;
+width:100%;
+transition:0.3s;
+}
+
+/* PLACEHOLDER CLEAR */
+
+input::placeholder{
+color:#555;
+font-weight:500;
+font-size:14px;
+}
+
+/* HOVER + FOCUS */
+
+input:hover{
+transform:scale(1.02);
+}
+
+input:focus{
+outline:none;
+box-shadow:0 0 12px #ffd369;
+}
+
+/* BUTTON FULL WIDTH */
+
+.predict-btn{
+grid-column:span 2;   /* 🔥 match 2 columns */
+padding:18px;
+font-size:16px;
+background:#ffd369;
+border:none;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.predict-btn:hover{
+background:#ffc107;
+transform:scale(1.03);
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:20px;
+background:rgba(0,0,0,0.3);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="logo">STRESS PREDICTOR</div>
+
+<ul>
+
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#predict">Stress Test</a></li>
+<li><a href="/history">History</a></li>
+
+{% if session.get("user_id") %}
+
+<li>
+<a href="/profile">
+<div class="profile-icon">
+{{ session.name[0] if session.name else "U" }}
+</div>
+</a>
+</li>
+
+<li><a href="/logout">Logout</a></li>
+
+{% else %}
+
+<li><a href="/login">Login</a></li>
+<li><a href="/register">Register</a></li>
+
+{% endif %}
+
+</ul>
+
+</nav>
+
+<!-- HERO SECTION -->
+
+<section id="home" class="hero">
+
+<div class="hero-content">
+
+<h1>AI Stress Prediction System</h1>
+
+<p>
+Predict your stress level using AI by analyzing
+health signals like heart rate, sleep, and lifestyle habits.
+</p>
+
+<a href="#predict" class="btn">Start Stress Test</a>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT SECTION -->
+
+<section id="about" class="about">
+
+<h2>About Stress Detection</h2>
+
+<p>
+
+Stress impacts both mental and physical health.
+Our AI system analyzes multiple indicators such as
+heart rate, blood pressure, sleep patterns,
+work pressure, and anxiety levels to predict stress.
+
+The goal is to help individuals understand
+their mental condition and take preventive action.
+
+</p>
+
+</section>
+
+
+<!-- PREDICTION SECTION -->
+
+<section id="predict" class="predict">
+
+<h2>Stress Prediction Test</h2>
+
+<div class="form-card">
+
+<form action="/predict" method="POST">
+
+<input type="number" name="heart_rate" placeholder="❤️ Heart Rate (60–120 BPM)" min="60" max="120" required>
+
+<input type="number" name="bp_sys" placeholder="🩺 BP Systolic (90–140)" min="90" max="140" required>
+
+<input type="number" name="bp_dia" placeholder="🩺 BP Diastolic (60–90)" min="60" max="90" required>
+
+<input type="number" step="0.1" name="sleep_hours" placeholder="😴 Sleep Hours (3–10)" min="3" max="10" required>
+
+<input type="number" name="fatigue_level" placeholder="😵 Fatigue (1–10)" min="1" max="10" required>
+
+<input type="number" name="headache_frequency" placeholder="🤕 Headache (0=No,1=Yes)" min="0" max="1" required>
+
+<input type="number" name="physical_activity" placeholder="🏃 Activity (1–10)" min="1" max="10" required>
+
+<input type="number" name="screen_time" placeholder="📱 Screen Time (1–10)" min="1" max="10" required>
+
+<input type="number" name="work_pressure" placeholder="💼 Work Pressure (1–10)" min="1" max="10" required>
+
+<input type="number" name="study_pressure" placeholder="📚 Study Pressure (1–10)" min="1" max="10" required>
+
+<input type="number" name="anxiety_level" placeholder="😰 Anxiety (1–10)" min="1" max="10" required>
+
+<input type="number" name="mood_swings" placeholder="🎭 Mood Swings (1–10)" min="1" max="10" required>
+
+<input type="number" name="concentration_level" placeholder="🧠 Concentration (1–10)" min="1" max="10" required>
+
+<button type="submit" class="predict-btn">Predict Stress</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© 2026 Stress Predictor | AI Stress Prediction System</p>
+
+</footer>
+
+</body>
+</html>

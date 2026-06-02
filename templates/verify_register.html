@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Verify OTP - StressAI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+
+background: linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+
+color:white;
+
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* NAVBAR */
+
+.navbar{
+
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(10px);
+
+}
+
+.navbar a{
+
+color:white;
+text-decoration:none;
+margin-left:20px;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:80vh;
+
+}
+
+/* CARD */
+
+.card{
+
+background:rgba(255,255,255,0.1);
+padding:40px;
+
+border-radius:15px;
+
+backdrop-filter:blur(12px);
+
+width:350px;
+
+text-align:center;
+
+}
+
+/* INPUT */
+
+input{
+
+width:100%;
+padding:12px;
+margin:15px 0;
+
+border:none;
+border-radius:8px;
+
+}
+
+/* BUTTON */
+
+button{
+
+width:100%;
+padding:12px;
+
+border:none;
+border-radius:8px;
+
+background:#ffd369;
+font-weight:600;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#ffc107;
+
+}
+
+/* TEXT */
+
+.info{
+
+font-size:14px;
+opacity:0.8;
+
+margin-bottom:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div><b>StressAI</b></div>
+
+<div>
+<a href="/">Home</a>
+<a href="/login">Login</a>
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2>Verify OTP</h2>
+
+<p class="info">Enter the 6-digit OTP sent to your email</p>
+
+<form method="POST">
+
+<input type="number" name="otp" placeholder="Enter OTP" required>
+
+<button>Verify</button>
+
+</form>
+
+<br>
+
+<a href="/register" style="color:white;">← Back to Register</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

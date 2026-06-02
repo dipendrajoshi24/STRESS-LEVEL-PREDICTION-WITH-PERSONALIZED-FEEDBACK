@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Prediction History - Stress Predictor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+background: linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+color:white;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(10px);
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+/* CONTENT */
+.container{
+padding:40px;
+}
+
+h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+/* CHART */
+.chart-box{
+width:80%;
+margin:auto;
+margin-bottom:40px;
+}
+
+/* TABLE */
+.table-container{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(8px);
+}
+
+th,td{
+padding:10px;
+border:1px solid rgba(255,255,255,0.2);
+text-align:center;
+font-size:14px;
+}
+
+th{
+background:rgba(0,0,0,0.4);
+}
+
+tr:hover{
+background:rgba(255,255,255,0.1);
+}
+
+/* COLOR BASED STRESS */
+.low{color:#00ff88; font-weight:600;}
+.medium{color:#ffd369; font-weight:600;}
+.high{color:#ff4d4d; font-weight:600;}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+<div><b>Stress Predictor</b></div>
+
+<div>
+<a href="/">Home</a>
+<a href="/#predict">Predict</a>
+<a href="/profile">Profile</a>
+<a href="/logout">Logout</a>
+</div>
+</div>
+
+<div class="container">
+
+<h2>Your Stress Prediction History</h2>
+
+<!-- CHART -->
+<div class="chart-box">
+<canvas id="stressChart"></canvas>
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
+
+<table>
+
+<tr>
+<th>HR</th>
+<th>BP Sys</th>
+<th>BP Dia</th>
+<th>Sleep</th>
+<th>Fatigue</th>
+<th>Headache</th>
+<th>Activity</th>
+<th>Screen</th>
+<th>Work</th>
+<th>Study</th>
+<th>Anxiety</th>
+<th>Mood</th>
+<th>Focus</th>
+<th>Stress</th>
+</tr>
+
+{% for row in data %}
+<tr>
+
+<td>{{row.heart_rate}}</td>
+<td>{{row.bp_sys}}</td>
+<td>{{row.bp_dia}}</td>
+<td>{{row.sleep_hours}}</td>
+<td>{{row.fatigue_level}}</td>
+<td>{{row.headache_frequency}}</td>
+<td>{{row.physical_activity}}</td>
+<td>{{row.screen_time}}</td>
+<td>{{row.work_pressure}}</td>
+<td>{{row.study_pressure}}</td>
+<td>{{row.anxiety_level}}</td>
+<td>{{row.mood_swings}}</td>
+<td>{{row.concentration_level}}</td>
+
+<td class="
+{% if row.stress_level == 'Low Stress' %}low
+{% elif row.stress_level == 'Medium Stress' %}medium
+{% else %}high
+{% endif %}
+">
+{{row.stress_level}}
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+<!-- CHART SCRIPT -->
+<script>
+const chartLabels = {{ chart_labels | safe }};
+const chartValues = {{ chart_values | safe }};
+
+const ctx = document.getElementById('stressChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: chartLabels,
+        datasets: [{
+            label: 'Stress Level Trend',
+            data: chartValues,
+            borderWidth: 2,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                ticks: {
+                    callback: function(value){
+                        return ['','Low','Medium','High'][value];
+                    }
+                },
+                min:1,
+                max:3
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

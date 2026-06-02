@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>User Profile - Stress Predictor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+
+background: linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+
+color:white;
+
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* NAVBAR */
+
+.navbar{
+
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(10px);
+
+}
+
+.navbar a{
+
+color:white;
+text-decoration:none;
+margin-left:20px;
+
+}
+
+/* PAGE CONTAINER */
+
+.container{
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:85vh;
+
+}
+
+/* PROFILE CARD */
+
+.profile-card{
+
+background:rgba(255,255,255,0.1);
+padding:40px;
+
+border-radius:15px;
+
+backdrop-filter:blur(12px);
+
+width:380px;
+
+text-align:center;
+
+}
+
+.avatar{
+
+width:80px;
+height:80px;
+
+background:#ffd369;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:30px;
+font-weight:600;
+
+color:black;
+
+margin:auto;
+margin-bottom:15px;
+
+}
+
+.profile-card h2{
+
+margin-bottom:10px;
+
+}
+
+.info{
+
+margin:10px 0;
+
+}
+
+input{
+
+width:100%;
+padding:12px;
+
+margin:10px 0;
+
+border:none;
+border-radius:8px;
+
+}
+
+button{
+
+width:100%;
+padding:12px;
+
+border:none;
+border-radius:8px;
+
+background:#ffd369;
+font-weight:600;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#ffc107;
+
+}
+
+.logout{
+
+display:inline-block;
+margin-top:15px;
+
+color:white;
+text-decoration:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div><b>Stress Predictor</b></div>
+
+<div>
+
+<a href="/">Home</a>
+<a href="/#predict">Predict</a>
+<a href="/history">History</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="profile-card">
+
+<div class="avatar">
+
+{{name[0]}}
+
+</div>
+
+<h2>{{name}}</h2>
+
+<div class="info">
+
+<b>Email:</b> {{email}}
+
+</div>
+{% if error %}
+    <div style="
+        background: rgba(255,0,0,0.2);
+        color:#ff4d4d;
+        padding:10px;
+        border-radius:8px;
+        margin-bottom:15px;
+        text-align:center;
+    ">
+        {{ error }}
+    </div>
+{% endif %}
+<h3 style="margin-top:20px;">Change Password</h3>
+
+<form method="POST" action="/change_password">
+
+<input type="password" name="current_password" placeholder="Current Password" required>
+
+<input type="password" name="new_password" placeholder="New Password" required>
+
+<button>Update Password</button>
+
+</form>
+
+<a class="logout" href="/logout">Logout</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

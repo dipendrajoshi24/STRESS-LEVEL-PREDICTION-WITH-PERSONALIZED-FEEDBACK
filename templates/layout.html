@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Stress Predictor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+
+background: linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+
+color:white;
+
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.navbar{
+
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(10px);
+
+}
+
+.navbar a{
+
+color:white;
+text-decoration:none;
+margin-left:20px;
+
+}
+
+.container{
+
+padding:40px;
+text-align:center;
+
+}
+
+button{
+
+padding:12px 20px;
+border:none;
+border-radius:8px;
+background:#ffd369;
+font-weight:600;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#ffc107;
+
+}
+
+.footer{
+
+text-align:center;
+padding:20px;
+background:rgba(0,0,0,0.3);
+margin-top:40px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div>
+<b>StressAI</b>
+</div>
+
+<div>
+
+<a href="/">Home</a>
+<a href="/#predict">Predict</a>
+<a href="/history">History</a>
+<a href="/profile">Profile</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+</div>
+
+<div class="container">
+
+{% block content %}
+
+{% endblock %}
+
+</div>
+
+<div class="footer">
+
+<p>© 2026 Stress Predictor |  Stress Predictor System</p>
+
+</div>
+
+</body>
+
+</html>

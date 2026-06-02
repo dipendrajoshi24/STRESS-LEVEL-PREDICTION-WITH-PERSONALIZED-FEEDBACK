@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Stress Prediction Result</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    .meter{
+
+width:300px;
+height:20px;
+background:#ddd;
+border-radius:20px;
+
+margin:20px auto;
+
+overflow:hidden;
+
+}
+#stressBar{
+
+height:100%;
+width:0%;
+
+background:red;
+
+transition:width 1s;
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+
+background: linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+
+color:white;
+
+}
+
+@keyframes gradientBG{
+
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+
+}
+
+.result-card{
+
+background:rgba(255,255,255,0.1);
+
+padding:50px;
+
+border-radius:15px;
+
+backdrop-filter:blur(12px);
+
+width:400px;
+
+text-align:center;
+
+}
+
+.result-card h1{
+
+margin-bottom:20px;
+
+}
+
+.result{
+
+font-size:28px;
+
+font-weight:600;
+
+margin-bottom:20px;
+
+}
+
+.low{
+
+color:#4caf50;
+
+}
+
+.medium{
+
+color:#ffc107;
+
+}
+
+.high{
+
+color:#ff4d4d;
+
+}
+
+button{
+
+padding:12px 25px;
+
+border:none;
+
+border-radius:8px;
+
+background:#ffd369;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#ffc107;
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="result-card">
+
+<h1>Your Stress Level</h1>
+
+{% if result == "Low Stress" %}
+<div class="result low">{{result}}</div>
+{% elif result == "Medium Stress" %}
+<div class="result medium">{{result}}</div>
+{% else %}
+<div class="result high">{{result}}</div>
+{% endif %}
+<!-- Stress Meter -->
+<div class="meter">
+<div id="stressBar"></div>
+</div>
+<p>{{tip}}</p>
+<a href="/"><button>Back to Home</button></a>
+
+</div>
+</body>
+</html>

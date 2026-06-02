@@ -12,8 +12,8 @@ app.secret_key = "stress_ai_secret"
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'dipendrajoshi062@gmail.com'
-app.config['MAIL_PASSWORD'] = 'genanhuqsveklezw'
+app.config['MAIL_USERNAME'] = 'xyz@gmail.com'//demo gmail use your mail and password 
+app.config['MAIL_PASSWORD'] = 'asdfvvddeffgg'//demo password 
 
 mail = Mail(app)
 
